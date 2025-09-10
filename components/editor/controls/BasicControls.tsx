@@ -103,7 +103,7 @@ export default function BasicControls() {
       {/* 지속 시간 */}
       <div>
         <Label htmlFor="duration" className="text-sm font-medium">
-          지속 시간: <span className="font-mono text-blue-600">{duration}s</span>
+          지속 시간: <span className="font-mono text-blue-600 font-feature-tabular">{duration}s</span>
         </Label>
         <Slider
           id="duration"
@@ -114,7 +114,7 @@ export default function BasicControls() {
           onValueChange={([value]) => updateProperty('duration', value)}
           className="mt-1"
         />
-        <div className="flex justify-between text-xs text-gray-500 mt-1">
+        <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400 mt-1">
           <span>0.1s</span>
           <span>10s</span>
         </div>
@@ -123,7 +123,7 @@ export default function BasicControls() {
       {/* 지연 시간 */}
       <div>
         <Label htmlFor="delay" className="text-sm font-medium">
-          지연 시간: <span className="font-mono text-blue-600">{delay}s</span>
+          지연 시간: <span className="font-mono text-blue-600 font-feature-tabular">{delay}s</span>
         </Label>
         <Slider
           id="delay"
@@ -134,7 +134,7 @@ export default function BasicControls() {
           onValueChange={([value]) => updateProperty('delay', value)}
           className="mt-1"
         />
-        <div className="flex justify-between text-xs text-gray-500 mt-1">
+        <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400 mt-1">
           <span>0s</span>
           <span>5s</span>
         </div>

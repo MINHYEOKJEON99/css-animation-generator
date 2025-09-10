@@ -8,19 +8,19 @@ import { Button } from "@/components/ui/Button";
 import { Select } from "@/components/ui/Select";
 
 const previewShapes = [
-  { value: "square", label: "정사각형" },
-  { value: "circle", label: "원형" },
-  { value: "text", label: "텍스트" },
-  { value: "button", label: "버튼" },
-  { value: "card", label: "카드" },
+  { value: "square", label: "Square" },
+  { value: "circle", label: "Circle" },
+  { value: "text", label: "Text" },
+  { value: "button", label: "Button" },
+  { value: "card", label: "Card" },
 ];
 
 const backgroundOptions = [
-  { value: "grid", label: "그리드" },
-  { value: "dots", label: "도트" },
-  { value: "gradient", label: "그라디언트" },
-  { value: "solid", label: "단색" },
-  { value: "transparent", label: "투명" },
+  { value: "grid", label: "Grid" },
+  { value: "dots", label: "Dots" },
+  { value: "gradient", label: "Gradient" },
+  { value: "solid", label: "Solid" },
+  { value: "transparent", label: "Transparent" },
 ];
 
 export default function AnimationCanvas() {
@@ -83,24 +83,26 @@ export default function AnimationCanvas() {
     if (animationState.invert !== 0) filter.push(`invert(${animationState.invert}%)`);
     if (animationState.saturate !== 100) filter.push(`saturate(${animationState.saturate}%)`);
     if (animationState.sepia !== 0) filter.push(`sepia(${animationState.sepia}%)`);
-    
+
     // 드롭 섀도우 처리
     if (animationState.dropShadow.blur > 0 || animationState.dropShadow.x !== 0 || animationState.dropShadow.y !== 0) {
-      filter.push(`drop-shadow(${animationState.dropShadow.x}px ${animationState.dropShadow.y}px ${animationState.dropShadow.blur}px ${animationState.dropShadow.color})`);
+      filter.push(
+        `drop-shadow(${animationState.dropShadow.x}px ${animationState.dropShadow.y}px ${animationState.dropShadow.blur}px ${animationState.dropShadow.color})`
+      );
     }
 
     const baseStyle: React.CSSProperties & Record<string, any> = {
       // 애니메이션 재생 중이 아닐 때만 실시간 스타일 적용
-      ...((!isPlaying || animationState.playState === 'paused') && {
+      ...((!isPlaying || animationState.playState === "paused") && {
         transform: transform.join(" ") || "none",
         filter: filter.join(" ") || "none",
         opacity: animationState.opacity,
       }),
-      transition: (!isPlaying || animationState.playState === 'paused') ? "all 0.2s ease-out" : "none"
+      transition: !isPlaying || animationState.playState === "paused" ? "all 0.2s ease-out" : "none",
     };
 
     // 애니메이션이 재생 중일 때 애니메이션 적용
-    if (isPlaying && animationState.playState === 'running') {
+    if (isPlaying && animationState.playState === "running") {
       if (animationState.useKeyframes && animationState.keyframes.length > 0) {
         // 키프레임 애니메이션
         baseStyle.animation = `custom-keyframe ${duration}s ${timingFunction} ${delay}s ${iterationCount} ${direction} ${fillMode}`;
@@ -260,38 +262,65 @@ export default function AnimationCanvas() {
   return (
     <div className="flex flex-col h-full">
       {/* 툴바 */}
-      <div className="flex items-center justify-between p-4 border-b">
-        <div className="flex items-center gap-4">
-          <Select
-            value={selectedShape}
-            onValueChange={setSelectedShape}
-            options={previewShapes}
-            placeholder="모양 선택"
-          />
-          <Select
-            value={selectedBackground}
-            onValueChange={setSelectedBackground}
-            options={backgroundOptions}
-            placeholder="배경 선택"
-          />
-        </div>
+      <div className="glass-strong p-6 border-b border-slate-200/50 dark:border-slate-700/50 relative z-30">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="text-sm font-medium text-slate-800 dark:text-slate-200">Preview:</div>
+            <Select
+              value={selectedShape}
+              onValueChange={setSelectedShape}
+              options={previewShapes}
+              placeholder="모양 선택"
+            />
+            <Select
+              value={selectedBackground}
+              onValueChange={setSelectedBackground}
+              options={backgroundOptions}
+              placeholder="배경 선택"
+            />
+          </div>
 
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={() => setIsPlaying(!isPlaying)}>
-            {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-          </Button>
-          <Button variant="outline" size="sm" onClick={restartAnimation}>
-            <RotateCcw className="w-4 h-4" />
-          </Button>
-          <Button variant="outline" size="sm" onClick={toggleFullscreen}>
-            <Maximize2 className="w-4 h-4" />
-          </Button>
-          <Button variant="outline" size="sm" onClick={exportAsGif} className="relative group">
-            <Download className="w-4 h-4" />
-            <span className="absolute -top-1 -right-1 text-xs bg-yellow-500 text-black px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              PRO
-            </span>
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsPlaying(!isPlaying)}
+              className="glass transition-smooth hover:shadow-modern-sm"
+            >
+              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+              <span className="ml-2 text-xs font-medium">{isPlaying ? "Pause" : "Play"}</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={restartAnimation}
+              className="glass transition-smooth hover:shadow-modern-sm"
+            >
+              <RotateCcw className="w-4 h-4" />
+              <span className="ml-2 text-xs font-medium">Restart</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={toggleFullscreen}
+              className="glass transition-smooth hover:shadow-modern-sm"
+            >
+              <Maximize2 className="w-4 h-4" />
+              <span className="ml-2 text-xs font-medium">Fullscreen</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={exportAsGif}
+              className="relative group glass transition-smooth hover:shadow-modern-sm overflow-hidden"
+            >
+              <Download className="w-4 h-4" />
+              <span className="ml-2 text-xs font-medium">Export</span>
+              <span className="ml-2 text-xs px-2 py-0.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                PRO
+              </span>
+            </Button>
+          </div>
         </div>
       </div>
 
