@@ -58,3 +58,26 @@
     color: hsl(var(--foreground));
   }
 }
+
+/* Animation Keyframes */
+@keyframes custom-animation {
+  from {
+    transform: var(--transform-start, none);
+    filter: var(--filter-start, none);
+    opacity: var(--opacity-start, 1);
+  }
+  to {
+    transform: var(--transform-end, none);
+    filter: var(--filter-end, none);
+    opacity: var(--opacity-end, 1);
+  }
+}
+
+@keyframes custom-keyframe {
+  /* Dynamic keyframes will be injected via JavaScript */
+}
+
+/* Default animation classes */
+.animate-element {
+  animation-play-state: var(--animation-play-state, running);
+}

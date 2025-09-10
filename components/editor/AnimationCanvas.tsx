@@ -56,37 +56,70 @@ export default function AnimationCanvas() {
 
   // 애니메이션 스타일 생성
   const getAnimationStyle = () => {
-    if (!isPlaying) return {};
-
     const { duration, delay, timingFunction, iterationCount, direction, fillMode } = animationState;
 
-    if (animationState.useKeyframes && animationState.keyframes.length > 0) {
-      // 키프레임 애니메이션
-      return {
-        animation: `custom-keyframe ${duration}s ${timingFunction} ${delay}s ${iterationCount} ${direction} ${fillMode}`,
-        animationPlayState: animationState.playState,
-      };
-    } else {
-      // 기본 애니메이션
-      const transform = [];
-      if (animationState.translateX !== 0) transform.push(`translateX(${animationState.translateX}px)`);
-      if (animationState.translateY !== 0) transform.push(`translateY(${animationState.translateY}px)`);
-      if (animationState.rotate !== 0) transform.push(`rotate(${animationState.rotate}deg)`);
-      if (animationState.scale !== 1) transform.push(`scale(${animationState.scale})`);
+    // 기본 변형 속성 생성
+    const transform = [];
+    if (animationState.translateX !== 0) transform.push(`translateX(${animationState.translateX}px)`);
+    if (animationState.translateY !== 0) transform.push(`translateY(${animationState.translateY}px)`);
+    if (animationState.translateZ !== 0) transform.push(`translateZ(${animationState.translateZ}px)`);
+    if (animationState.rotate !== 0) transform.push(`rotate(${animationState.rotate}deg)`);
+    if (animationState.rotateX !== 0) transform.push(`rotateX(${animationState.rotateX}deg)`);
+    if (animationState.rotateY !== 0) transform.push(`rotateY(${animationState.rotateY}deg)`);
+    if (animationState.rotateZ !== 0) transform.push(`rotateZ(${animationState.rotateZ}deg)`);
+    if (animationState.scale !== 1) transform.push(`scale(${animationState.scale})`);
+    if (animationState.scaleX !== 1) transform.push(`scaleX(${animationState.scaleX})`);
+    if (animationState.scaleY !== 1) transform.push(`scaleY(${animationState.scaleY})`);
+    if (animationState.skewX !== 0) transform.push(`skewX(${animationState.skewX}deg)`);
+    if (animationState.skewY !== 0) transform.push(`skewY(${animationState.skewY}deg)`);
 
-      const filter = [];
-      if (animationState.blur !== 0) filter.push(`blur(${animationState.blur}px)`);
-      if (animationState.brightness !== 100) filter.push(`brightness(${animationState.brightness}%)`);
-      if (animationState.contrast !== 100) filter.push(`contrast(${animationState.contrast}%)`);
-
-      return {
-        animation: `custom-animation ${duration}s ${timingFunction} ${delay}s ${iterationCount} ${direction} ${fillMode}`,
-        animationPlayState: animationState.playState,
-        "--transform-end": transform.join(" "),
-        "--filter-end": filter.join(" "),
-        "--opacity-end": animationState.opacity,
-      } as React.CSSProperties;
+    // 필터 속성 생성
+    const filter = [];
+    if (animationState.blur !== 0) filter.push(`blur(${animationState.blur}px)`);
+    if (animationState.brightness !== 100) filter.push(`brightness(${animationState.brightness}%)`);
+    if (animationState.contrast !== 100) filter.push(`contrast(${animationState.contrast}%)`);
+    if (animationState.grayscale !== 0) filter.push(`grayscale(${animationState.grayscale}%)`);
+    if (animationState.hueRotate !== 0) filter.push(`hue-rotate(${animationState.hueRotate}deg)`);
+    if (animationState.invert !== 0) filter.push(`invert(${animationState.invert}%)`);
+    if (animationState.saturate !== 100) filter.push(`saturate(${animationState.saturate}%)`);
+    if (animationState.sepia !== 0) filter.push(`sepia(${animationState.sepia}%)`);
+    
+    // 드롭 섀도우 처리
+    if (animationState.dropShadow.blur > 0 || animationState.dropShadow.x !== 0 || animationState.dropShadow.y !== 0) {
+      filter.push(`drop-shadow(${animationState.dropShadow.x}px ${animationState.dropShadow.y}px ${animationState.dropShadow.blur}px ${animationState.dropShadow.color})`);
     }
+
+    const baseStyle: React.CSSProperties & Record<string, any> = {
+      // 애니메이션 재생 중이 아닐 때만 실시간 스타일 적용
+      ...((!isPlaying || animationState.playState === 'paused') && {
+        transform: transform.join(" ") || "none",
+        filter: filter.join(" ") || "none",
+        opacity: animationState.opacity,
+      }),
+      transition: (!isPlaying || animationState.playState === 'paused') ? "all 0.2s ease-out" : "none"
+    };
+
+    // 애니메이션이 재생 중일 때 애니메이션 적용
+    if (isPlaying && animationState.playState === 'running') {
+      if (animationState.useKeyframes && animationState.keyframes.length > 0) {
+        // 키프레임 애니메이션
+        baseStyle.animation = `custom-keyframe ${duration}s ${timingFunction} ${delay}s ${iterationCount} ${direction} ${fillMode}`;
+      } else {
+        // 기본 애니메이션 - 실제 변환 값이 있을 때만 적용
+        if (transform.length > 0 || filter.length > 0 || animationState.opacity !== 1) {
+          baseStyle.animation = `custom-animation ${duration}s ${timingFunction} ${delay}s ${iterationCount} ${direction} ${fillMode}`;
+          baseStyle["--transform-start"] = "none";
+          baseStyle["--transform-end"] = transform.join(" ") || "none";
+          baseStyle["--filter-start"] = "none";
+          baseStyle["--filter-end"] = filter.join(" ") || "none";
+          baseStyle["--opacity-start"] = "1";
+          baseStyle["--opacity-end"] = animationState.opacity.toString();
+        }
+      }
+      baseStyle.animationPlayState = animationState.playState;
+    }
+
+    return baseStyle;
   };
 
   // 미리보기 요소 렌더링

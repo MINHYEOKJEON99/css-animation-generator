@@ -53,15 +53,15 @@ export function Select({
             className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute top-full left-0 z-20 mt-1 w-full rounded-md border bg-popover p-1 text-popover-foreground shadow-lg">
+          <div className="absolute top-full left-0 z-20 mt-1 w-full rounded-md border bg-white dark:bg-gray-800 p-1 text-gray-900 dark:text-gray-100 shadow-lg border-gray-200 dark:border-gray-700">
             {options.map((option) => (
               <button
                 key={option.value}
                 type="button"
                 onClick={() => handleSelect(option.value)}
                 className={cn(
-                  "relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground",
-                  value === option.value && "bg-accent text-accent-foreground"
+                  "relative flex w-full cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-blue-50 hover:text-blue-900 dark:hover:bg-blue-900 dark:hover:text-blue-100 transition-colors",
+                  value === option.value && "bg-blue-100 text-blue-900 dark:bg-blue-800 dark:text-blue-100"
                 )}
               >
                 {option.label}
