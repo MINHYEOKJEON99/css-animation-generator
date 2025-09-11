@@ -1,0 +1,118 @@
+{
+  "title": "CSS Animation Studio",
+  "subtitle": "Professional Animation Editor",
+  "header": {
+    "theme": "Theme",
+    "language": "Language",
+    "export": "Export",
+    "import": "Import",
+    "presets": "Presets",
+    "settings": "Settings"
+  },
+  "controls": {
+    "basic": "Basic",
+    "transform": "Transform",
+    "filter": "Filter",
+    "advanced": "Advanced",
+    "keyframes": "Keyframes"
+  },
+  "animation": {
+    "duration": "Duration",
+    "delay": "Delay",
+    "timingFunction": "Timing Function",
+    "iterationCount": "Iteration Count",
+    "direction": "Direction",
+    "fillMode": "Fill Mode",
+    "playState": "Play State"
+  },
+  "transform": {
+    "quickPresets": "Quick Presets",
+    "slideInLeft": "← From Left",
+    "slideInRight": "From Right →",
+    "slideInTop": "↓ From Top",
+    "slideInBottom": "From Bottom ↑",
+    "zoomIn": "Zoom In",
+    "zoomOut": "Zoom Out",
+    "rotate360": "360°",
+    "flip": "Flip",
+    "resetTransform": "Reset Transform",
+    "translate": "Translate",
+    "rotate": "Rotate",
+    "scale": "Scale",
+    "skew": "Skew",
+    "translateX": "X-axis Translation",
+    "translateY": "Y-axis Translation",
+    "translateZ": "Z-axis Translation (3D)",
+    "rotate2d": "2D Rotation",
+    "rotateX": "X-axis Rotation (3D)",
+    "rotateY": "Y-axis Rotation (3D)",
+    "rotateZ": "Z-axis Rotation (3D)",
+    "scaleOverall": "Overall Scale",
+    "scaleX": "X-axis Scale",
+    "scaleY": "Y-axis Scale",
+    "skewX": "X-axis Skew",
+    "skewY": "Y-axis Skew"
+  },
+  "filter": {
+    "filterPresets": "Filter Presets",
+    "vintage": "Vintage",
+    "blackwhite": "Black & White",
+    "blur": "Blur",
+    "dramatic": "Dramatic",
+    "dreamy": "Dreamy",
+    "cyberpunk": "Cyberpunk",
+    "resetFilters": "Reset Filters",
+    "opacity": "Opacity",
+    "brightness": "Brightness",
+    "contrast": "Contrast",
+    "grayscale": "Grayscale",
+    "hueRotate": "Hue Rotate",
+    "invert": "Invert",
+    "saturate": "Saturate",
+    "sepia": "Sepia",
+    "dropShadow": "Shadow Effect",
+    "shadowX": "X Offset",
+    "shadowY": "Y Offset",
+    "shadowBlur": "Blur",
+    "shadowColor": "Color"
+  },
+  "buttons": {
+    "play": "Play",
+    "pause": "Pause",
+    "reset": "Reset All Settings",
+    "copy": "Copy Code",
+    "save": "Save as Preset",
+    "load": "Load Preset",
+    "clear": "Clear",
+    "examples": "Examples",
+    "docs": "Docs",
+    "proVersion": "Pro Version"
+  },
+  "presets": {
+    "title": "Animation Presets",
+    "search": "Search presets...",
+    "category": {
+      "all": "All",
+      "attention": "Attention",
+      "entrance": "Entrance",
+      "exit": "Exit",
+      "loading": "Loading",
+      "text": "Text",
+      "hover": "Hover",
+      "morphing": "Morphing",
+      "advanced": "Advanced"
+    },
+    "pro": {
+      "upgrade": "Upgrade to Pro",
+      "description": "Unlock 100+ premium presets",
+      "price": "Buy for $19"
+    }
+  },
+  "export": {
+    "css": "Copy CSS",
+    "sass": "Copy SASS",
+    "tailwind": "Copy Tailwind",
+    "react": "Copy React",
+    "vue": "Copy Vue"
+  }
+}

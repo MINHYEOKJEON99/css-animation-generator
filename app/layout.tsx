@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { I18nProvider } from "@/components/providers/I18nProvider";
+import { Header } from "@/components/layout/Header";
 import "./globals.css";
 
 const inter = Inter({
@@ -10,7 +13,7 @@ const inter = Inter({
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono", 
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   display: "swap",
 });
@@ -26,11 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} overflow-y-hidden font-sans antialiased`}>
+        <ThemeProvider>
+          <I18nProvider>
+            <Header />
+            {children}
+          </I18nProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

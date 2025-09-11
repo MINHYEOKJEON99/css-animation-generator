@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/Label'
 import { Button } from '@/components/ui/Button'
 import { RotateCcw, Move3d, Maximize, RotateCw, FlipHorizontal, FlipVertical } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs'
+import { useTranslation } from 'react-i18next'
 
 export default function TransformControls() {
   const {
@@ -24,6 +25,8 @@ export default function TransformControls() {
     updateProperty,
     updateMultipleProperties
   } = useAnimationStore()
+  
+  const { t } = useTranslation('common')
   
   // 프리셋 변형 적용
   const applyPresetTransform = (type: string) => {
@@ -99,35 +102,35 @@ export default function TransformControls() {
     <div className="space-y-4">
       {/* 빠른 프리셋 */}
       <div>
-        <Label className="text-sm font-medium">빠른 프리셋</Label>
+        <Label className="text-sm font-medium">{t('transform.quickPresets')}</Label>
         <div className="grid grid-cols-2 gap-2 mt-1">
           <Button
             variant="outline"
             size="sm"
             onClick={() => applyPresetTransform('slideInLeft')}
           >
-            ← 왼쪽에서
+            {t('transform.slideInLeft')}
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => applyPresetTransform('slideInRight')}
           >
-            오른쪽에서 →
+            {t('transform.slideInRight')}
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => applyPresetTransform('slideInTop')}
           >
-            ↓ 위에서
+            {t('transform.slideInTop')}
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => applyPresetTransform('slideInBottom')}
           >
-            아래에서 ↑
+            {t('transform.slideInBottom')}
           </Button>
           <Button
             variant="outline"
@@ -135,14 +138,14 @@ export default function TransformControls() {
             onClick={() => applyPresetTransform('zoomIn')}
           >
             <Maximize className="w-4 h-4 mr-1" />
-            확대
+            {t('transform.zoomIn')}
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => applyPresetTransform('zoomOut')}
           >
-            축소
+            {t('transform.zoomOut')}
           </Button>
           <Button
             variant="outline"
@@ -150,7 +153,7 @@ export default function TransformControls() {
             onClick={() => applyPresetTransform('rotate360')}
           >
             <RotateCw className="w-4 h-4 mr-1" />
-            360°
+            {t('transform.rotate360')}
           </Button>
           <Button
             variant="outline"
@@ -158,24 +161,24 @@ export default function TransformControls() {
             onClick={() => applyPresetTransform('flip')}
           >
             <FlipHorizontal className="w-4 h-4 mr-1" />
-            뒤집기
+            {t('transform.flip')}
           </Button>
         </div>
       </div>
       
       <Tabs defaultValue="translate" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="translate">이동</TabsTrigger>
-          <TabsTrigger value="rotate">회전</TabsTrigger>
-          <TabsTrigger value="scale">크기</TabsTrigger>
-          <TabsTrigger value="skew">기울기</TabsTrigger>
+          <TabsTrigger value="translate">{t('transform.translate')}</TabsTrigger>
+          <TabsTrigger value="rotate">{t('transform.rotate')}</TabsTrigger>
+          <TabsTrigger value="scale">{t('transform.scale')}</TabsTrigger>
+          <TabsTrigger value="skew">{t('transform.skew')}</TabsTrigger>
         </TabsList>
         
         {/* 이동 (Translate) */}
         <TabsContent value="translate" className="space-y-4 mt-4">
           <div>
             <Label htmlFor="translateX" className="text-sm font-medium">
-              X축 이동: <span className="font-mono text-blue-600">{translateX}px</span>
+              {t('transform.translateX')}: <span className="font-mono text-blue-600">{translateX}px</span>
             </Label>
             <Slider
               id="translateX"
@@ -190,7 +193,7 @@ export default function TransformControls() {
           
           <div>
             <Label htmlFor="translateY" className="text-sm font-medium">
-              Y축 이동: <span className="font-mono text-blue-600">{translateY}px</span>
+              {t('transform.translateY')}: <span className="font-mono text-blue-600">{translateY}px</span>
             </Label>
             <Slider
               id="translateY"
@@ -205,7 +208,7 @@ export default function TransformControls() {
           
           <div>
             <Label htmlFor="translateZ">
-              Z축 이동 (3D): <span className="font-mono">{translateZ}px</span>
+              {t('transform.translateZ')}: <span className="font-mono">{translateZ}px</span>
             </Label>
             <Slider
               id="translateZ"
@@ -223,7 +226,7 @@ export default function TransformControls() {
         <TabsContent value="rotate" className="space-y-4 mt-4">
           <div>
             <Label htmlFor="rotate">
-              2D 회전: <span className="font-mono">{rotate}°</span>
+              {t('transform.rotate2d')}: <span className="font-mono">{rotate}°</span>
             </Label>
             <Slider
               id="rotate"
@@ -238,7 +241,7 @@ export default function TransformControls() {
           
           <div>
             <Label htmlFor="rotateX">
-              X축 회전 (3D): <span className="font-mono">{rotateX}°</span>
+              {t('transform.rotateX')}: <span className="font-mono">{rotateX}°</span>
             </Label>
             <Slider
               id="rotateX"
@@ -253,7 +256,7 @@ export default function TransformControls() {
           
           <div>
             <Label htmlFor="rotateY">
-              Y축 회전 (3D): <span className="font-mono">{rotateY}°</span>
+              {t('transform.rotateY')}: <span className="font-mono">{rotateY}°</span>
             </Label>
             <Slider
               id="rotateY"
@@ -268,7 +271,7 @@ export default function TransformControls() {
           
           <div>
             <Label htmlFor="rotateZ">
-              Z축 회전 (3D): <span className="font-mono">{rotateZ}°</span>
+              {t('transform.rotateZ')}: <span className="font-mono">{rotateZ}°</span>
             </Label>
             <Slider
               id="rotateZ"
@@ -286,7 +289,7 @@ export default function TransformControls() {
         <TabsContent value="scale" className="space-y-4 mt-4">
           <div>
             <Label htmlFor="scale">
-              전체 크기: <span className="font-mono">{scale}x</span>
+              {t('transform.scaleOverall')}: <span className="font-mono">{scale}x</span>
             </Label>
             <Slider
               id="scale"
@@ -301,7 +304,7 @@ export default function TransformControls() {
           
           <div>
             <Label htmlFor="scaleX">
-              X축 크기: <span className="font-mono">{scaleX}x</span>
+              {t('transform.scaleX')}: <span className="font-mono">{scaleX}x</span>
             </Label>
             <Slider
               id="scaleX"
@@ -316,7 +319,7 @@ export default function TransformControls() {
           
           <div>
             <Label htmlFor="scaleY">
-              Y축 크기: <span className="font-mono">{scaleY}x</span>
+              {t('transform.scaleY')}: <span className="font-mono">{scaleY}x</span>
             </Label>
             <Slider
               id="scaleY"
@@ -334,7 +337,7 @@ export default function TransformControls() {
         <TabsContent value="skew" className="space-y-4 mt-4">
           <div>
             <Label htmlFor="skewX">
-              X축 기울기: <span className="font-mono">{skewX}°</span>
+              {t('transform.skewX')}: <span className="font-mono">{skewX}°</span>
             </Label>
             <Slider
               id="skewX"
@@ -349,7 +352,7 @@ export default function TransformControls() {
           
           <div>
             <Label htmlFor="skewY">
-              Y축 기울기: <span className="font-mono">{skewY}°</span>
+              {t('transform.skewY')}: <span className="font-mono">{skewY}°</span>
             </Label>
             <Slider
               id="skewY"
@@ -371,7 +374,7 @@ export default function TransformControls() {
         className="w-full"
       >
         <RotateCcw className="w-4 h-4 mr-2" />
-        변형 초기화
+        {t('transform.resetTransform')}
       </Button>
     </div>
   )

@@ -1,0 +1,118 @@
+{
+  "title": "CSS 애니메이션 스튜디오",
+  "subtitle": "전문 애니메이션 에디터",
+  "header": {
+    "theme": "테마",
+    "language": "언어",
+    "export": "내보내기",
+    "import": "가져오기",
+    "presets": "프리셋",
+    "settings": "설정"
+  },
+  "controls": {
+    "basic": "기본",
+    "transform": "변형",
+    "filter": "필터",
+    "advanced": "고급",
+    "keyframes": "키프레임"
+  },
+  "animation": {
+    "duration": "지속 시간",
+    "delay": "지연",
+    "timingFunction": "타이밍 함수",
+    "iterationCount": "반복 횟수",
+    "direction": "방향",
+    "fillMode": "채우기 모드",
+    "playState": "재생 상태"
+  },
+  "transform": {
+    "quickPresets": "빠른 프리셋",
+    "slideInLeft": "← 왼쪽에서",
+    "slideInRight": "오른쪽에서 →",
+    "slideInTop": "↓ 위에서",
+    "slideInBottom": "아래에서 ↑",
+    "zoomIn": "확대",
+    "zoomOut": "축소",
+    "rotate360": "360°",
+    "flip": "뒤집기",
+    "resetTransform": "변형 초기화",
+    "translate": "이동",
+    "rotate": "회전",
+    "scale": "크기",
+    "skew": "기울기",
+    "translateX": "X축 이동",
+    "translateY": "Y축 이동",
+    "translateZ": "Z축 이동 (3D)",
+    "rotate2d": "2D 회전",
+    "rotateX": "X축 회전 (3D)",
+    "rotateY": "Y축 회전 (3D)",
+    "rotateZ": "Z축 회전 (3D)",
+    "scaleOverall": "전체 크기",
+    "scaleX": "X축 크기",
+    "scaleY": "Y축 크기",
+    "skewX": "X축 기울기",
+    "skewY": "Y축 기울기"
+  },
+  "filter": {
+    "filterPresets": "필터 프리셋",
+    "vintage": "빈티지",
+    "blackwhite": "흑백",
+    "blur": "블러",
+    "dramatic": "드라마틱",
+    "dreamy": "몽환적",
+    "cyberpunk": "사이버펑크",
+    "resetFilters": "필터 초기화",
+    "opacity": "투명도",
+    "brightness": "밝기",
+    "contrast": "대비",
+    "grayscale": "회색조",
+    "hueRotate": "색상 회전",
+    "invert": "반전",
+    "saturate": "채도",
+    "sepia": "세피아",
+    "dropShadow": "그림자 효과",
+    "shadowX": "X 오프셋",
+    "shadowY": "Y 오프셋",
+    "shadowBlur": "블러",
+    "shadowColor": "색상"
+  },
+  "buttons": {
+    "play": "재생",
+    "pause": "일시정지",
+    "reset": "모든 설정 초기화",
+    "copy": "코드 복사",
+    "save": "프리셋으로 저장",
+    "load": "프리셋 불러오기",
+    "clear": "지우기",
+    "examples": "예제",
+    "docs": "문서",
+    "proVersion": "Pro 버전"
+  },
+  "presets": {
+    "title": "애니메이션 프리셋",
+    "search": "프리셋 검색...",
+    "category": {
+      "all": "전체",
+      "attention": "주목",
+      "entrance": "입장",
+      "exit": "퇴장",
+      "loading": "로딩",
+      "text": "텍스트",
+      "hover": "호버",
+      "morphing": "모핑",
+      "advanced": "고급"
+    },
+    "pro": {
+      "upgrade": "Pro 버전으로 업그레이드",
+      "description": "100개 이상의 프리미엄 프리셋 잠금 해제",
+      "price": "$19에 구매"
+    }
+  },
+  "export": {
+    "css": "CSS 복사",
+    "sass": "SASS 복사",
+    "tailwind": "Tailwind 복사",
+    "react": "React 복사",
+    "vue": "Vue 복사"
+  }
+}
