@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react'
 import { useAnimationStore } from '@/lib/store/useAnimationStore'
 import { useLicenseStore } from '@/lib/store/useLicenseStore'
-import { freePresets, proPresets, PresetCategory, searchPresets } from '@/lib/animations/presets'
+import { freePresets, proPresets, PresetCategory, searchPresets, getFeaturedPresets } from '@/lib/animations/presets'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { Search, Lock, Star, Sparkles } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { PresetPreview } from '@/components/ui/PresetPreview'
 
 export default function PresetSelector() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -27,17 +28,22 @@ export default function PresetSelector() {
     { value: PresetCategory.ATTENTION, label: t('presets.category.attention') },
     { value: PresetCategory.ENTRANCE, label: t('presets.category.entrance') },
     { value: PresetCategory.EXIT, label: t('presets.category.exit') },
-    { value: PresetCategory.LOADING, label: t('presets.category.loading') },
+    { value: PresetCategory.BACKGROUND, label: t('presets.category.background') },
     { value: PresetCategory.TEXT, label: t('presets.category.text') },
+    { value: PresetCategory.LOADING, label: t('presets.category.loading') },
     { value: PresetCategory.HOVER, label: t('presets.category.hover') },
     { value: PresetCategory.MORPHING, label: t('presets.category.morphing') },
     { value: PresetCategory.ADVANCED, label: t('presets.category.advanced') },
+    { value: PresetCategory.SEASONAL, label: t('presets.category.seasonal') },
+    { value: PresetCategory.CUSTOM, label: t('presets.category.custom') },
   ]
 
   const filteredPresets = searchPresets(
     searchQuery,
     selectedCategory === 'all' ? undefined : (selectedCategory as PresetCategory)
   )
+
+  const featuredPresets = getFeaturedPresets()
 
   const handlePresetClick = (preset: any) => {
     if (preset.isPro && !isPro) {
@@ -85,6 +91,62 @@ export default function PresetSelector() {
         </div>
       </div>
 
+      {/* Featured Presets */}
+      {searchQuery === '' && selectedCategory === 'all' && (
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <Star className="w-5 h-5 text-yellow-500" />
+            <h3 className="font-semibold text-lg">Featured Pro Effects</h3>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {featuredPresets.map((preset) => (
+              <div
+                key={preset.id}
+                className={`
+                  relative p-4 cursor-pointer transition-all hover:shadow-xl rounded-lg
+                  border border-yellow-200 dark:border-yellow-700 bg-gradient-to-br from-yellow-50/50 to-orange-50/50
+                  dark:from-yellow-900/20 dark:to-orange-900/20 hover:from-yellow-100/60 hover:to-orange-100/60
+                  ${currentPreset === preset.id ? 'ring-2 ring-yellow-500' : ''}
+                  ${!isPro ? 'opacity-75' : ''}
+                `}
+                onClick={() => handlePresetClick(preset)}
+              >
+                <div className="absolute top-2 right-2">
+                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                </div>
+                
+                {/* 미리보기 애니메이션 */}
+                <div className="flex justify-center mb-3">
+                  <PresetPreview preset={preset} size="md" />
+                </div>
+                
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-medium text-sm pr-4">{preset.name}</h4>
+                    {!isPro && <Lock className="w-3 h-3 text-gray-400" />}
+                  </div>
+                  {preset.description && (
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                      {preset.description}
+                    </p>
+                  )}
+                  <div className="flex flex-wrap gap-1">
+                    {preset.tags.slice(0, 2).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-1.5 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Pro Banner */}
       {!isPro && (
         <div className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-lg">
@@ -105,6 +167,23 @@ export default function PresetSelector() {
               {t('presets.pro.price')}
             </Button>
           </div>
+        </div>
+      )}
+
+      {/* All Presets Section */}
+      {(searchQuery !== '' || selectedCategory !== 'all') && (
+        <div className="flex items-center gap-2 mt-6">
+          <Sparkles className="w-4 h-4 text-blue-500" />
+          <h3 className="font-semibold">
+            {searchQuery ? `Search Results (${filteredPresets.length})` : `${categories.find(c => c.value === selectedCategory)?.label} Presets`}
+          </h3>
+        </div>
+      )}
+      
+      {searchQuery === '' && selectedCategory === 'all' && (
+        <div className="flex items-center gap-2 mt-6">
+          <Sparkles className="w-4 h-4 text-blue-500" />
+          <h3 className="font-semibold">All Animation Presets ({filteredPresets.length})</h3>
         </div>
       )}
 

@@ -96,11 +96,14 @@
       "attention": "주목",
       "entrance": "입장",
       "exit": "퇴장",
-      "loading": "로딩",
+      "background": "배경",
       "text": "텍스트",
+      "loading": "로딩",
       "hover": "호버",
       "morphing": "모핑",
-      "advanced": "고급"
+      "advanced": "고급",
+      "seasonal": "계절",
+      "custom": "사용자 정의"
     },
     "pro": {
       "upgrade": "Pro 버전으로 업그레이드",

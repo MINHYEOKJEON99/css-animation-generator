@@ -96,11 +96,14 @@
       "attention": "Attention",
       "entrance": "Entrance",
       "exit": "Exit",
-      "loading": "Loading",
+      "background": "Background",
       "text": "Text",
+      "loading": "Loading",
       "hover": "Hover",
       "morphing": "Morphing",
-      "advanced": "Advanced"
+      "advanced": "Advanced",
+      "seasonal": "Seasonal",
+      "custom": "Custom"
     },
     "pro": {
       "upgrade": "Upgrade to Pro",
